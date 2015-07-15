@@ -1,0 +1,26 @@
+div.container{margin-top:10px;margin-left:10px;width:800px;}
+
+.menuLayer, .testButton{float:left;}
+
+div.controller{
+	width:400px;height:40px;text-align:center;line-height:40px;
+	background-color:LightCoral;cursor:pointer;color:#fff;font-weight:600
+}
+
+section.content{
+	margin-top:10px;
+	background-color:skyblue;width:400px;height:400px;
+	padding:10px;line-height:1.25em;box-sizing:border-box
+}
+
+div.testButton{margin-left:10px;margin-top:40px;}
+
+button{width:100px;height:40px;margin-top:10px;font-size:13px;display:block;}
+
+div.controller{
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}

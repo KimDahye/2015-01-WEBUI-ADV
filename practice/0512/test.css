@@ -1,0 +1,18 @@
+#sketchbook {
+  width: 100%;
+  height: calc(100% - 30px);
+  background: #e1e1e1;
+}
+
+.square {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: #efefef;
+  border: 1px solid;
+}
+
+footer {
+  float: right;
+  height: 30px;
+}

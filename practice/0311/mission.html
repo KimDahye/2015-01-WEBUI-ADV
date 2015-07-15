@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>3.11일 미션문제</title>
+<style type="text/css" media="screen">
+	#mywrap {
+	  width : 100px;
+	  outline: 1px solid gray;
+	  height : 100px;
+    margin : 50px;
+	}
+</style>
+
+<body>
+	<button id="mywrap"></button>
+</body>
+
+<!-- 
+미션1. 
+클릭시에 나오는 'Uncaught TypeError: undefined is not a function' 오류를 해결하세요.
+
+미션2.
+아래 동영상과 같이 배경색이 점차적으로 바뀔 수 있도록 changeBGColor에 코드를 추가하세요.
+https://www.youtube.com/watch?v=JK7fCpDhy9g
+hint : setInterval함수와  CSS의opacity 속성을 활용.
+-->
+
+<script>
+function Button(sSelector, aColor) {
+  this.elBase = document.querySelector(sSelector);
+  this.aColor = aColor || ["red", "green", "blue"];
+  this.nLen = this.aColor.length;
+  this.myInterval;
+  this.init();
+}
+
+Button.prototype.init = function() {
+  this.elBase.addEventListener("click", function(ev) {
+			this.changeBGColor();
+  }.bind(this));
+};
+
+Button.prototype.changeBGColor = function() {
+  clearInterval(this.myInterval);
+
+  var nIndex = myUtil.getRandomNumber.call(this);
+  this.elBase.style.backgroundColor = this.aColor[nIndex];
+  this.elBase.style.opacity = 0;
+  this.myInterval = setInterval(this.changeOpacity.bind(this), 100);
+
+};
+
+Button.prototype.changeOpacity = function() {
+  this.elBase.style.opacity  =  Number(this.elBase.style.opacity) + 0.1;
+}
+
+//Utility methods
+var myUtil = {
+  getRandomNumber : function() {
+   	return Math.floor(Math.random() * this.nLen);
+  }
+};
+//service Code
+var oB = new Button("#mywrap", ["red", "blue", "orange", "pink"]);	
+</script>
+
+</html>

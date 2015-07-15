@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>function Scope</title>
+<style>
+ul {list-style:none;width:1000px;margin:40px auto;} 
+ul li {width:100px;height:100px;outline:1px solid gray;display:inline-block;line-height:100px;text-align:center;}
+	
+</style>
+</head>
+<body>
+
+<ul> <li>2012</li> <li>2013</li> <li>2014</li> <li>2015</li> </ul>
+
+<script>
+	var aColor = ["rgb(255, 212, 212)", "rgb(255, 165, 165)", "rgb(255, 100, 100)", "rgb(255, 10, 10)"];
+
+	(function() {
+		var listLI = document.querySelectorAll("ul > li");
+		var listLILength = listLI.length;
+
+		for(var i=0; i<listLILength; i++) {
+			(function () {
+				var j = i;
+
+				listLI[i].addEventListener("click", function(e) {
+					e.target.style.backgroundColor = aColor[j];
+				});
+			})();
+		}
+
+	})();
+</script>
+</body>
+</html>

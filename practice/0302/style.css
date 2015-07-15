@@ -1,0 +1,94 @@
+body{
+	font-family: 'Myriad Set Pro', 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;;
+	margin: 0px auto;
+}
+
+* {
+	1outline: 1px solid black;
+}
+
+header{
+	float: left;
+	width: 80%;
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-bottom: 15px;
+}
+
+.left-header{
+	float: left;
+	width: 80%;
+}
+
+.logo{
+	font-size: 2.5em;
+	float: left;
+	display: inline-block;
+}
+
+.underline {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	display: inline-block;
+	float: left;
+	width: 100%;
+	height: 1px;
+	background-color: #eee;
+}
+
+.profile-container {
+	margin-top: 10px;
+	float: right;
+	width: 20%;
+
+}
+
+img{
+	max-width: 80px;
+	max-height: auto;
+	border-radius: 50%;
+}
+
+.board{
+	float: left;
+	width: 50%;
+	padding-left: 10%;
+}
+
+.title-contianer{
+	overflow: auto;
+}
+
+.left-title-container{
+	float: left;
+	width: 80%;
+}
+
+.title {
+	font-size: 1.5em;
+}
+
+.button {
+	float: right;
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+	border
+}
+
+.introduce{
+	float: right;
+	width: 25%;
+	height: auto;
+	margin-right: 10%;
+}
+
+footer{
+	padding-left: 10%;
+	padding-right: 10%;
+	width: 100%;
+	height: 100px;
+	clear: both;
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>quiz2</title>
+</head>
+
+<body>
+<script>
+/**
+ * 아래의 결과가 나오도록 코드를 작성하세요.
+ */
+ 
+(function() {
+	window.addEventListener("DOMContentLoaded", function() {
+		// 여기 아래에 코드를 작성하세요.
+		// prototype을 사용해야 합니다.
+
+		function MyTODO() {
+			this.obj = [];
+		}
+
+		//argument이름 바꾸고, 프로토타입을 묶었다.
+		MyTODO.prototype = {
+			addWork : function(sNewWork) {this.obj.push(sNewWork);},
+			deleteWork : function(sDeletedWork){
+				for(var i = 0; i < this.obj.length; i++){
+					if(this.obj[i] === sDeletedWork){
+						this.obj.splice(i, 1); 
+					}
+				}
+			},
+			getWorkList : function () { return this.obj;}
+		}
+
+		/*
+		MyTODO.prototype.addWork = function (sNewWork) {
+			this.obj.push(newWork);
+
+		};
+
+		MyTODO.prototype.deleteWork = function (sDeletedWork) {
+			for(var i = 0; i < this.obj.length; i++){
+				if(this.obj[i] === sDeletedWork){
+					this.obj.splice(i, 1); 
+				}
+			}		
+		};
+
+		MyTODO.prototype.getWorkList = function() {
+			return this.obj;
+		}
+		*/
+		
+		// console.log에 다음처럼 두 번의 결과가 나와야 합니다.
+		var oMT = new MyTODO();
+		var oMT2 = new MyTODO();
+
+		oMT.addWork("study");
+		oMT.addWork("meeting");
+		oMT.addWork("study C++");
+		oMT.addWork("study JAVASCRIPT");
+		console.log(oMT.getWorkList());    //["study", "meeting", "study C++", "study JAVASCRIPT"] 
+		oMT.deleteWork("study C++");
+		console.log(oMT.getWorkList());    //["study", "meeting", "study JAVASCRIPT"] 
+	});
+})();
+</script>
+
+</body>
+</html>

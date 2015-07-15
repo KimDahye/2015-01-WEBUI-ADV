@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Test</title>
+	<script>
+	document.addEventListener('DOMContentLoaded', function(event){
+		function Square() {
+			this.r = rand(0, 255);
+			this.g = rand(0, 255);
+			this.b = rand(0, 255);
+			this.element = document.createElement('div');
+			this.updateColor();
+
+			var size = rand(20, 100);
+			this.element.style.width = size + 'px';
+			this.element.style.height = size + 'px';
+
+			this._onMouseMove = this._onMouseMove.bind(this);
+			this._onMouseUp = this._onMouseUp.bind(this);
+
+			this.element.addEventListener('click', this._onSelect.bind(this));
+			this.element.addEventListener('mousedown', this._onDragStart.bind(this));
+		}
+
+		Square.prototype.updateColor = function() {
+			this.element.style.backgroundColor = 'rgb('+this.r+', '+this.g+', '+this.b+')';
+		};
+
+		Square.prototype.setParent = function(parent) {
+			parent.appendChild(this.element);
+			this.element.style.position = 'absolute';
+			this.element.style.top = rand(0, parent.offsetHeight - this.element.offsetHeight - 4) + 'px';
+			this.element.style.left = rand(0, parent.offsetWidth - this.element.offsetWidth - 4) + 'px';
+
+			this.animate();
+		};
+
+		Square.prototype._onSelect = function(event) {
+			if (Square.currentElement) {
+				Square.currentElement.style.outline = '';
+			}
+
+			Square.currentElement = this.element;
+			this.element.style.outline = '2px solid black';
+		};
+
+		Square.prototype.animate = function() {
+			var dr = 255 - this.r, dg = 255 - this.g, db = 255 - this.b;
+			var stepR = dr / 2000, stepG = dg / 2000, stepB = db / 2000; // 1ms 당 변경되어야 할 값
+			var startR = this.r, startG = this.g, startB = this.b;
+			var self = this, start;
+
+			function tick(timestamp){
+				if (!start) start = timestamp;
+				var elapsed = timestamp - start;
+
+				self.r = Math.round(Math.min(startR + stepR * elapsed, 255));
+				self.g = Math.round(Math.min(startG + stepG * elapsed, 255));
+				self.b = Math.round(Math.min(startB + stepB * elapsed, 255));
+				self.updateColor();
+
+				if (self.r < 255 || self.g < 255 || self.b < 255) {
+					window.requestAnimationFrame(tick);
+				}
+			};
+
+			window.requestAnimationFrame(tick);
+		};
+
+		Square.prototype._onDragStart = function(event) {
+			this._startX = event.pageX;
+			this._startY = event.pageY;
+			this._startTop = parseInt(this.element.style.top);
+			this._startLeft = parseInt(this.element.style.left);
+
+			document.addEventListener('mousemove', this._onMouseMove);
+			document.addEventListener('mouseup', this._onMouseUp);
+		};
+
+		Square.prototype._onMouseMove = function(event) {
+			var diffX = event.pageX - this._startX, diffY = event.pageY - this._startY;
+			this.element.style.top = this._startTop + diffY + 'px';
+			this.element.style.left = this._startLeft + diffX + 'px';
+		};
+
+		Square.prototype._onMouseUp = function(event) {
+			document.removeEventListener('mousemove', this._onMouseMove);
+			document.removeEventListener('mouseup', this._onMouseUp);
+		};
+
+		document.querySelector('#add').addEventListener('click', function(event){
+			var square = new Square();
+			square.setParent(document.querySelector('#box'));
+		});
+
+		document.querySelector('#del').addEventListener('click', function(event){
+			if (Square.currentElement) {
+				Square.currentElement.parentNode.removeChild(Square.currentElement);
+			}
+		});
+
+		function rand(min, max) {
+			return Math.round(Math.random() * (max-min)) + min;
+		}
+	});
+	</script>
+  </head>
+  <body>
+    <div id="box" style="position:relative;border:2px solid black;width:500px;height:400px;">
+	</div>
+	<button id="add">추가</button>
+	<button id="del">삭제</button>
+  </body>
+</html>
